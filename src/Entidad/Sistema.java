@@ -25,5 +25,11 @@ public class Sistema {
         
     }
     
+    /*public void agregar(String nombre, String password, String passwordVal){
+
+       Usuario objeto = new Usuario(nombre,  password,  passwordVal   );
+        usuarios.add(objeto);
+    }*/
+    
     
 }

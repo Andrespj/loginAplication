@@ -4,34 +4,43 @@
  * and open the template in the editor.
  */
 package Control;
+
+import Entidad.Sistema;
 import Entidad.Usuario;
 import Frontera.FramePrincipal;
-import Entidad.Sistema;
+import static Frontera.FramePrincipal.sistema;
+import java.util.ArrayList;
 
 /**
  *
- * @author usuario
+ * @author ACER
  */
-public class ValidarLogin {
+public class ValidarRegistro {
     private Sistema sistema=FramePrincipal.sistema;
     
-    public ValidarLogin(){
+    public ValidarRegistro(){
         
     }
-    public String verificarLogin(Usuario usuario){
+    public String verificarRegistro(Usuario usuario){
         if(!ValidarLongitudNombre(usuario.getNombre()))
             return ("longitud nombre incorrecto");
         if(!ValidarLogitudPassword(usuario.getPassword()))
             return ("longitud contraseña incorrecto");
+       
+        if(!usuario.getPassword().equals(usuario.getPasswordVal()))
+           return ("contraseñas no coinciden");
+       
         for(Usuario u: sistema.getUsuarios()){
-            if(u.getNombre().equals(usuario.getNombre())&&
-                    u.getPassword().equals(usuario.getPassword()))
-                return ("bienvenido");
+            if(u.getNombre().equals(usuario.getNombre()))
+            return ("Usuario ya existe");
             
         }
-            return ("datos incorrectos");
+                ArrayList <Usuario> usuarios = sistema.getUsuarios();
+                usuarios.add(usuario);
+                sistema.setUsuarios(usuarios);  
         
-    
+        return ("Usuario registrado");
+        
     }
     public boolean ValidarLongitudNombre(String nombre){
         return (nombre.length()>1 && nombre.length()<=6);
@@ -39,4 +48,5 @@ public class ValidarLogin {
     public boolean ValidarLogitudPassword(String password){
         return (password.length()>=3 && password.length()<=6);
     }
+    
 }
