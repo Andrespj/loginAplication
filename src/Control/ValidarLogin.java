@@ -37,6 +37,6 @@ public class ValidarLogin {
         return (nombre.length()>1 && nombre.length()<=6);
     }
     public boolean ValidarLogitudPassword(String password){
-        return (password.length()>=3 && password.length()<=6);
+        return (password.length()>=3 && password.length()<6);
     }
 }
